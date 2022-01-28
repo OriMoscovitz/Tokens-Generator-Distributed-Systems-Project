@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: dsdeploy
+  name: dsdeploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dsdeploy
+  template:
+    metadata:
+      labels:
+        app: dsdeploy
+    spec:
+      containers:
+      - image: orimoscovitz/docker_ds
+        name: docker-ds
+        ports: 
+        - containerPort: 5000
+        volumeMounts:
+        - mountPath: ~/mnt/o/college/ds
+          name: test-volume
+      volumes:
+      - name: test-volume
+        emptyDir: {}
